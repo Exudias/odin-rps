@@ -14,38 +14,16 @@ function playOneRound(playerChoice, computerChoice)
         return 0;
     }
 
-    if (playerChoice === "rock")
+    // Assuming input is validated, which it is
+    if (playerChoice === "rock" && computerChoice === "paper" || 
+    playerChoice === "paper" && computerChoice === "scissors" ||
+    playerChoice === "scissors" && computerChoice === "rock")
     {
-        if (computerChoice === "paper")
-        {
-            return -1;
-        }
-        else
-        {
-            return 1;
-        }
+        return -1;
     }
-    else if (playerChoice === "paper")
+    else
     {
-        if (computerChoice === "scissors")
-        {
-            return -1;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else if (playerChoice === "scissors")
-    {
-        if (computerChoice === "rock")
-        {
-            return -1;
-        }
-        else
-        {
-            return 1;
-        }
+        return 1;
     }
 }
 
