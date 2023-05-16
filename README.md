@@ -1,2 +1,2 @@
 # odin-rps
-ODP Project: Rock Paper Scissors
+My repo for the ODP project "Rock Paper Scissors".
