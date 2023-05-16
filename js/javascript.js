@@ -1,4 +1,4 @@
-let choices = ["Rock", "Paper", "Scissors"];
+let choices = ["rock", "paper", "scissors"];
 
 function getComputerChoice()
 {
@@ -7,7 +7,6 @@ function getComputerChoice()
 
 function playOneRound(playerChoice, computerChoice)
 {
-    computerChoice = computerChoice.toLowerCase();
     playerChoice = playerChoice.toLowerCase();
     
     if (computerChoice === playerChoice)
@@ -57,20 +56,32 @@ function game()
 
     for (let i = 0; i < 5; i++)
     {
-        const playerSelection = prompt("Make your pick: ");
+        let playerSelection;
+        while (true)
+        {
+            playerSelection = prompt("Make your pick: ");
+            if (validateInput(playerSelection))
+            {
+                break;
+            }
+            else
+            {
+                console.log("Invalid input!");
+            }
+        }
         const computerSelection = getComputerChoice();
 
         switch (playOneRound(playerSelection, computerSelection))
         {
             case 0:
-                console.log("A draw!");
+                console.log(`Round ${i + 1}:\nA draw!`);
                 break;
             case 1:
-                console.log(`You win! ${capitalize(playerSelection)} beats ${computerSelection.toLowerCase()}`);
+                console.log(`Round ${i + 1}:\nYou win! ${capitalize(playerSelection)} beats ${computerSelection.toLowerCase()}.`);
                 playerScore++;
                 break;
             case -1:
-                console.log(`You lose! ${capitalize(computerSelection)} beats ${playerSelection.toLowerCase()}`);
+                console.log(`Round ${i + 1}:\nYou lose! ${capitalize(computerSelection)} beats ${playerSelection.toLowerCase()}.`);
                 computerScore++;
                 break;
         }
@@ -97,6 +108,13 @@ function game()
 function capitalize(inputStr)
 {
     return (inputStr.charAt(0).toUpperCase() + inputStr.substring(1).toLowerCase());
+}
+
+function validateInput(givenInput)
+{
+    givenInput = givenInput.toLowerCase();
+
+    return choices.includes(givenInput);
 }
 
 game();
