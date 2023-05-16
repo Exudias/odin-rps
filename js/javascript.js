@@ -12,45 +12,91 @@ function playOneRound(playerChoice, computerChoice)
     
     if (computerChoice === playerChoice)
     {
-        return "It's a Tie!";
+        return 0;
     }
 
     if (playerChoice === "rock")
     {
         if (computerChoice === "paper")
         {
-            return "You Lose! Paper beats Rock";
+            return -1;
         }
         else
         {
-            return "You Win! Rock beats Scissors";
+            return 1;
         }
     }
     else if (playerChoice === "paper")
     {
         if (computerChoice === "scissors")
         {
-            return "You Lose! Scissors beats Paper";
+            return -1;
         }
         else
         {
-            return "You Win! Paper beats Rock";
+            return 1;
         }
     }
     else if (playerChoice === "scissors")
     {
         if (computerChoice === "rock")
         {
-            return "You Lose! Rock beats Scissors";
+            return -1;
         }
         else
         {
-            return "You Win! Scissors beats Paper";
+            return 1;
         }
     }
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
+function game()
+{
+    let playerScore = 0;
+    let computerScore = 0;
 
-console.log(playOneRound(playerSelection, computerSelection));
+    for (let i = 0; i < 5; i++)
+    {
+        const playerSelection = prompt("Make your pick: ");
+        const computerSelection = getComputerChoice();
+
+        switch (playOneRound(playerSelection, computerSelection))
+        {
+            case 0:
+                console.log("A draw!");
+                break;
+            case 1:
+                console.log(`You win! ${capitalize(playerSelection)} beats ${computerSelection.toLowerCase()}`);
+                playerScore++;
+                break;
+            case -1:
+                console.log(`You lose! ${capitalize(computerSelection)} beats ${playerSelection.toLowerCase()}`);
+                computerScore++;
+                break;
+        }
+    }
+
+    let flavorText = "";
+
+    if (playerScore > computerScore)
+    {
+        flavorText = "You win!";
+    }
+    else if (playerScore === computerScore)
+    {
+        flavorText = "It's a tie!";
+    }
+    else
+    {
+        flavorText = "You lose!";
+    }
+
+    console.log(flavorText + ` \nThe score was ${playerScore} : ${computerScore}`);
+}
+
+function capitalize(inputStr)
+{
+    return (inputStr.charAt(0).toUpperCase() + inputStr.substring(1).toLowerCase());
+}
+
+game();
